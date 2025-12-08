@@ -17,8 +17,8 @@ Tasks are stored in a local JSON file. If the file doesn’t exist, the app will
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/AnimBager/RoadmapSH-Projects.git
+cd Task tracker
 
 # Run the CLI (assuming using Python 3.x)
 python -m task_tracker.cli add "Buy groceries"
