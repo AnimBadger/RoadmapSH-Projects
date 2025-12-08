@@ -20,7 +20,7 @@ The roadmap that guides these projects can be found here: [Backend Developer Roa
 
 ## GitHub Repository
 
-## You can explore the full repository here: [Your GitHub Repo Link](YOUR_GITHUB_REPO_LINK)
+<!-- You can explore the full repository here: [Your GitHub Repo Link](YOUR_GITHUB_REPO_LINK) -->
 
 ---
 
