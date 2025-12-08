@@ -18,7 +18,7 @@ Welcome to my **Software Engineering projects** repository! This repository cont
 
 The roadmap that guides these projects can be found here: [Backend Developer Roadmap on roadmap.sh](hhttps://roadmap.sh/backend/projects)
 
-## GitHub Repository
+<!-- ## GitHub Repository -->
 
 <!-- You can explore the full repository here: [Your GitHub Repo Link](YOUR_GITHUB_REPO_LINK) -->
 
