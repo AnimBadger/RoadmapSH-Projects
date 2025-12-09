@@ -1,6 +1,7 @@
 from task_tracker.add_task import add_task
 from task_tracker.update_task import update_task 
 from task_tracker.delete_task import delete_task
+from task_tracker.list_tasks import list_tasks
 
 def show_help():
     print("""
@@ -90,6 +91,9 @@ def main():
                     continue
 
                 delete_task(task_id)
+
+            elif command == 'list':
+                list_tasks()
                     
 
 
