@@ -6,7 +6,15 @@ from pathlib import Path
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 TASK_FILE = os.getenv('TASK_FILE', BASE_DIR /'task.json')
+env_path = Path(__file__).resolve().parent.parent / ".env"
 
+def get_task_id_limit() -> int:
+   try:
+      return int(os.getenv('TASK_ID_LIMIT', 9999))
+   except ValueError:
+      return 9999
+   
+TASK_ID_LIMIT = get_task_id_limit()
 
 
 def load_tasks() -> list:
