@@ -29,10 +29,10 @@ def test_list_tasks_behavior_and_output():
         result = list_tasks()  # no arguments needed
         output = mock_stdout.getvalue()
 
-    # 1️⃣ Behavior: returns the tasks
+    # returns the tasks
     assert result == sample_tasks
 
-    # 2️⃣ Printed output: check key info is present
+    # check key info is present
     assert "ID       : 1" in output
     assert "Description: Test task" in output
     assert "Status     : todo" in output
