@@ -1,7 +1,6 @@
 from task_tracker.task import Task
-import os
+from task_tracker.utils import load_tasks, save_task
 import random
-import json
 
 TASK_FILE = 'tasks.json'
 
@@ -13,21 +12,10 @@ def add_task(description: str) -> Task :
 
     tasks.append(task.to_dict())
 
-    save_task(tasks)
-    return task
-
-
-def load_tasks() -> list:
-    # If file doesn't exist, create it with an empty list
-    if not os.path.exists(TASK_FILE):
-        with open(TASK_FILE, 'w') as file:
-            json.dump([], file, indent=2)
-        return []
-
-    # If file exists, load the tasks
-    with open(TASK_FILE, 'r') as file:
-        return json.load(file)
-    
+    task_saved = save_task(tasks)
+    if task_saved:
+        print(f'Task with id {task_id} successfully saved.')
+    return task    
 
 def generate_task_id(tasks: list[dict]) -> int:
     existing_ids = {task["id"] for task in tasks}
@@ -37,7 +25,3 @@ def generate_task_id(tasks: list[dict]) -> int:
         if task_id not in existing_ids:
             return task_id
         
-def save_task(task: list[dict]):
-    with open(TASK_FILE, 'w') as file:
-        json.dump(task, file, indent=2)
-        print('Successfully added task.')
