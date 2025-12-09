@@ -1,5 +1,5 @@
 from task_tracker.add_task import add_task
-from task_tracker.task import Task
+from task_tracker.update_task import update_task 
 def show_help():
     """
     Docstring for show_help
@@ -64,17 +64,38 @@ def main():
         if not user_input:
             continue
 
-        parts = user_input.split()
-        command = parts[0]
-        
+        parts = user_input.split(' ', 1) # split only once
+        command = parts[0] # add
+        #parts[1] - id description description
+              
         try:
             if command.lower() == 'exit':
                 print("Goodbye 👋")
                 break
 
             elif command.lower() == 'add':
-                description = parts[1]
+                if len(parts) < 2:
+                    print('Usage: add <description>')
+                    continue
+
+                description = parts[1] # everything after add because of the split
                 add_task(description)
+
+            elif command.lower() == 'update':
+                if len(parts) < 2:
+                    print('Usage: update <id> <new description>')
+                    continue
+                try:
+                    id_part, description = parts[1].split(' ', 1)
+                    task_id = int(id_part)
+                except ValueError:
+                    print('Please provide a valid task id.')
+                    continue
+
+                update_task(task_id, description)
+            
+                    
+
 
         except (IndentationError, ValueError):
             print("Invalid command format. Type 'help for usage.'")
