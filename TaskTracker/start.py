@@ -1,23 +1,7 @@
 from task_tracker.add_task import add_task
 from task_tracker.update_task import update_task 
-def show_help():
-    """
-    Docstring for show_help
-    Show help to teach how to use progran
-    """
-#     print("""Task Tracker CLICommands:
-#     add "task description"
-#     update <id> "new description"
-#     delete <id>
-#     list
-#     mark <id> <todo|in-progress|done>
+from task_tracker.delete_task import delete_task
 
-#     Examples:
-#     python start.py add "Buy groceries"
-#     python start.py update 1 "Buy groceries and cook"
-#     python start.py mark 1 done
-#     python start.py list
-# """)
 def show_help():
     print("""
     Task Tracker CLI
@@ -58,22 +42,23 @@ def main():
     Entry point of application
     """
     show_help()
-    while True:
+    running = True
+    while running:
         user_input = input('\n> ').strip()
 
         if not user_input:
             continue
 
         parts = user_input.split(' ', 1) # split only once
-        command = parts[0] # add
+        command = parts[0].lower() # add
         #parts[1] - id description description
+
+        running = handle_command(command)
+        if not running:
+            print("Goodbye 👋")
               
         try:
-            if command.lower() == 'exit':
-                print("Goodbye 👋")
-                break
-
-            elif command.lower() == 'add':
+            if command == 'add':
                 if len(parts) < 2:
                     print('Usage: add <description>')
                     continue
@@ -81,7 +66,7 @@ def main():
                 description = parts[1] # everything after add because of the split
                 add_task(description)
 
-            elif command.lower() == 'update':
+            elif command == 'update':
                 if len(parts) < 2:
                     print('Usage: update <id> <new description>')
                     continue
@@ -94,6 +79,17 @@ def main():
 
                 update_task(task_id, description)
             
+            elif command == 'delete':
+                if len(parts) < 2:
+                    print(f'Usage: delete <id>')
+                    continue
+                try:
+                    task_id = int(parts[1])
+                except ValueError:
+                    print('Please provide a valid task id')
+                    continue
+
+                delete_task(task_id)
                     
 
 
@@ -101,6 +97,8 @@ def main():
             print("Invalid command format. Type 'help for usage.'")
     
     
+def handle_command(command: str) -> bool:
+    return command.strip().lower() != 'exit'
 
     
 if __name__ == '__main__':
