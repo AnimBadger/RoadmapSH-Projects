@@ -1,10 +1,11 @@
 import os
 import json
 from dotenv import load_dotenv
+from pathlib import Path
 
 load_dotenv()
-
-TASK_FILE = os.getenv('TASK_FILE', 'task.json')
+BASE_DIR = Path(__file__).resolve().parent.parent
+TASK_FILE = os.getenv('TASK_FILE', BASE_DIR /'task.json')
 
 
 

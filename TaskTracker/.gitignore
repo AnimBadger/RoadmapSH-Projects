@@ -42,3 +42,4 @@ htmlcov/
 # Project-specific files
 # ------------------------------
 tasks.json
+TaskTracker/tasks.json
