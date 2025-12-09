@@ -2,6 +2,7 @@ from task_tracker.utils import TASK_FILE
 import os
 import json
 from datetime import datetime
+
 def update_task(task_id: int, new_description: str):
     if not os.path.exists(TASK_FILE):
         print('No tasks found')
