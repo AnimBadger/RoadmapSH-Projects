@@ -1,7 +1,5 @@
-from task_tracker.add_task import add_task
-from task_tracker.update_task import update_task 
-from task_tracker.delete_task import delete_task
-from task_tracker.list_tasks import list_tasks
+from commands import *
+from task_tracker.mark_task_in_progress import mark_task_in_progress
 
 def show_help():
     print("""
@@ -36,74 +34,46 @@ def show_help():
     exit
     Exit the application
 """)
-    
+
 def main():
     """
-    Docstring for main
-    Entry point of application
+    Entry point of the application
     """
     show_help()
     running = True
+
+    COMMAND_HANDLERS = {
+        "add": handle_add,
+        "update": handle_update,
+        "delete": handle_delete,
+        "list": handle_list,
+        "mark_in_progress": mark_task_in_progress
+    }
+
     while running:
-        user_input = input('\n> ').strip()
+        user_input = input("\n> ").strip()
 
         if not user_input:
             continue
 
-        parts = user_input.split(' ', 1) # split only once
-        command = parts[0].lower() # add
-        #parts[1] - id description description
+        parts = user_input.split(" ", 1)
+        command = parts[0].lower()
 
+        # handle exit
         running = handle_command(command)
         if not running:
             print("Goodbye 👋")
-              
-        try:
-            if command == 'add':
-                if len(parts) < 2:
-                    print('Usage: add <description>')
-                    continue
+            break
 
-                description = parts[1] # everything after add because of the split
-                add_task(description)
-
-            elif command == 'update':
-                if len(parts) < 2:
-                    print('Usage: update <id> <new description>')
-                    continue
-                try:
-                    id_part, description = parts[1].split(' ', 1)
-                    task_id = int(id_part)
-                except ValueError:
-                    print('Please provide a valid task id.')
-                    continue
-
-                update_task(task_id, description)
-            
-            elif command == 'delete':
-                if len(parts) < 2:
-                    print(f'Usage: delete <id>')
-                    continue
-                try:
-                    task_id = int(parts[1])
-                except ValueError:
-                    print('Please provide a valid task id')
-                    continue
-
-                delete_task(task_id)
-
-            elif command == 'list':
-                list_tasks()
-                    
-
-
-        except (IndentationError, ValueError):
-            print("Invalid command format. Type 'help for usage.'")
-    
+        # execute command handler
+        handler = COMMAND_HANDLERS.get(command)
+        if handler:
+            handler(parts)
+        else:
+            print(f"Unknown command: {command}")
     
 def handle_command(command: str) -> bool:
-    return command.strip().lower() != 'exit'
-
+    return command != "exit"
     
 if __name__ == '__main__':
     main()
