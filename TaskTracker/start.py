@@ -1,53 +1,20 @@
 from commands import *
-from task_tracker.mark_task_in_progress import mark_task_in_progress
+from commands.help_command import handle_help
 
-def show_help():
-    print("""
-    Task Tracker CLI
-    ================
-    A simple command-line tool to manage your tasks.
-
-    Available Commands
-    ------------------
-    add <description>
-    Add a new task
-    Example: add Buy groceries
-
-    update <id> <new description>   
-    Update an existing task
-    Example: update 1 Buy groceries and cook
-
-    delete <id>
-    Delete a task
-    Example: delete 1
-
-    list
-    List all tasks
-
-    mark <id> <todo|in-progress|done>
-    Mark a task's status
-    Example: mark 1 done
-
-    help
-    Show this help menu
-
-    exit
-    Exit the application
-""")
 
 def main():
     """
     Entry point of the application
-    """
-    show_help()
+    """ 
     running = True
-
+    handle_help(['help'])
     COMMAND_HANDLERS = {
         "add": handle_add,
         "update": handle_update,
         "delete": handle_delete,
         "list": handle_list,
-        "mark_in_progress": mark_task_in_progress
+        "mark_in_progress": handle_mark_in_progress,
+        "help": handle_help
     }
 
     while running:
