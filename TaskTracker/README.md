@@ -25,5 +25,3 @@ cd TaskTracker
 pyhon3 start.py
 
 ```
-
-Project URL: [Task Tracker on GitHub](https://roadmap.sh/projects/task-tracker)
