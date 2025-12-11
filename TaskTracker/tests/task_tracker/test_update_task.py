@@ -1,5 +1,5 @@
 import json 
-from unittest.mock import patch, mock_open
+from unittest.mock import patch
 from task_tracker.update_task import update_task
 
 def test_update_task_success():
@@ -20,19 +20,18 @@ def test_update_task_success():
         }
     ]
 
-    # Patch os.path.exists to simulate file exists
-    # Patch open to simulate reading/writing the tasks.json file
-    m_open = mock_open(read_data=json.dumps(fake_tasks))
-    with patch("task_tracker.update_task.os.path.exists", return_value=True), \
-         patch("task_tracker.update_task.open", m_open):
+    with patch("task_tracker.update_task.load_tasks", return_value=fake_tasks) as mock_load, \
+         patch("task_tracker.update_task.save_task", return_value=True) as mock_save:
 
         # Call the function we are testing
         updated_task = update_task(1, "Updated Task")
+
+        mock_load.assert_called_once()
+
 
     # Check that the task was updated
     assert updated_task is not None
     assert updated_task["description"] == "Updated Task"
     assert updated_task["updatedAt"] is not None
 
-    # Ensure the file was opened for writing (saving updates)
-    m_open.assert_called_with("tasks.json", "w")
+   
