@@ -14,7 +14,9 @@ def main():
         "delete": handle_delete,
         "list": handle_list,
         "mark_in_progress": handle_mark_in_progress,
-        "help": handle_help
+        "help": handle_help,
+        "mark_done": handle_mark_done,
+        "mark_todo": handle_mark_todo
     }
 
     while running:
