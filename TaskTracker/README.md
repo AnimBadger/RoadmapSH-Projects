@@ -19,8 +19,9 @@ Tasks are stored in a local JSON file. If the file doesn’t exist, the app will
 # Clone the repo
 git clone https://github.com/AnimBager/RoadmapSH-Projects.git
 cd TaskTracker
+```
 
-
+```shell
 pyhon3 start.py
 
 ```
