@@ -1,23 +1,14 @@
-from task_tracker.utils import TASK_FILE
-import os
-import json
+from task_tracker.utils import load_tasks, save_task
 from datetime import datetime
 
 def update_task(task_id: int, new_description: str):
-    if not os.path.exists(TASK_FILE):
-        print('No tasks found')
-        return None
-    
-    with open(TASK_FILE, 'r') as file:
-        tasks = json.load(file)
+    tasks = load_tasks()
 
     for task in tasks:
         if task['id'] == task_id:
             task['description'] = new_description
             task['updatedAt'] = datetime.now().isoformat()
-
-            with open(TASK_FILE, 'w') as file:
-                json.dump(tasks, file, indent=2)
+            if save_task(tasks):
                 print(f'Task id {task_id} updated successfully')
             return task
         
