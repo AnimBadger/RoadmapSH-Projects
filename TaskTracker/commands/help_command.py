@@ -32,13 +32,14 @@ exit
 """
 
 
-def handle_help(parts: list):
+def handle_help(parts: list[str]) -> bool:
     """
     Handler for the 'help' command.
     Shows the HELP_MESSAGE. No extra arguments are allowed.
     """
     if len(parts) > 1:
         print("Usage: help")
-        return
+        return False
 
     print(HELP_MESSAGE)
+    return True

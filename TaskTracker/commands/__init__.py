@@ -4,12 +4,15 @@ from .delete_command import handle_delete
 from .mark_in_progress_command import handle_mark_in_progress
 from .list_command import handle_list
 from .help_command import handle_help
-
+from .mark_done_command import handle_mark_done
+from .mark_todo_command import handle_mark_todo  
 __all__ = [
     "handle_add",
     "handle_update",
     "handle_delete",
     "handle_mark_in_progress",
     "handle_list",
-    "handle_help"
+    "handle_help",
+    "handle_mark_done",
+    "handle_mark_todo"
 ]

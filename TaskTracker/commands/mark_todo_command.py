@@ -1,15 +1,16 @@
-from task_tracker.mark_task_in_progress import mark_task_in_progress
+from task_tracker.mark_task_todo import mark_task_todo
 
-def handle_mark_in_progress(parts: list[str]) -> bool:
+def handle_mark_todo(parts: list[str]) -> bool:
     if len(parts) < 2:
-        print('Usage: mark_in_progress <id>')
+        print('Usage: marke_todo <id>')
         return False
     else:
         try:
             task_id = int(parts[1])
-            mark_task_in_progress(task_id)
+            mark_task_todo(task_id)
             return True
         except ValueError:
             print('Please provide a valid task id')
             return False
+
         
